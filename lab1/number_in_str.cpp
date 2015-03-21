@@ -8,9 +8,9 @@ char* allocate(int len)
 }
 bool initial(char *str,int len)
 {
-	std::cout<<"Enter str:"<<" "<<std::endl;
-	std::cin.getline(str,len);
-	std::cout<<str;
+	cout<<"Enter str:"<<" "<<endl;
+	cin.getline(str,len);
+	cout<<str;
 	if(*str!=0)
 	return true;
 }
@@ -27,7 +27,7 @@ int maxS(int *arr,int size)
         sum+=*p;
         p++;
     }
-     std::cout<<std::endl<<"sum"<<" "<<sum<<std::endl;
+     cout<<endl<<"sum"<<" "<<sum<<endl;
     return max;
 }
 
