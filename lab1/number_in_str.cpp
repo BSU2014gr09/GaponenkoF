@@ -3,7 +3,7 @@
 #include <cstring>
 #include "str_header.h"
 using namespace std;
-char* allocate(int len)
+char* allocate(int len) // Сильно похоже на функции Гринкевич ((((
 {
 	return new char[len];
 }
