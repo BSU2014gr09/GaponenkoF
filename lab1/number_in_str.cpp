@@ -1,3 +1,4 @@
+// в main только объявления переменных и вызовы функций. Вся реализация функций в ОТДЕЛЬНОМ файле а их объявление в .h
 #include <iostream>
 #include <cstring>
 #include "str_header.h"
@@ -31,7 +32,7 @@ int maxS(int *arr,int size)
     return max;
 }
 
-
+// TODO •	использование библиотечных функций для работы со строками;
 int find_number(char *str)
 {
     char *pstr=new char[strlen(str)];
