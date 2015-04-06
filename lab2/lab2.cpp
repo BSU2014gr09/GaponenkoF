@@ -1,3 +1,6 @@
+//TODO ввод вывод матриц из файла
+// ф-ции перенести в один cpp
+
 #include <iostream>
 #include "lab2_header.h"
 using namespace std;
@@ -32,6 +35,7 @@ void sorted_column(int **a, int n, int m)
                 int *tmp=a[i];
                 a[i]=a[j];
                 a[j]=tmp;
+                // оптимизировать!!!
             }
         }
     }
