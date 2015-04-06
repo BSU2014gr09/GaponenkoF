@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
-
+#include <fstream>
 using namespace std;
 
 int** allocate(int const N, int const M)
@@ -17,23 +17,31 @@ int** allocate(int const N, int const M)
 
 void initial(int **arr,int const N, int const M)
 {
-    srand(time(0));
 
-    for(int i=0; i<M; i++)
-        for(int j=0; j<N; j++)
-            arr[i][j]=rand()%100;
+    ifstream in("in.txt");
+
+	for (int j = 0; j < N; j++)
+	{
+		for (int **i = arr; i < arr + M; i++)
+			in >> (*i)[j];
+	}
+    in.close();
 }
 
 void printArr(int** Arr,int const N, int const M)
 {
+    ofstream out("out.txt");
     for(int i=0; i<N; i++)
     {
         for(int j=0; j<M; j++)
         {
-            cout<<setw(5)<<Arr[j][i]<<" ";
+            out<<setw(5)<<Arr[j][i]<<" ";
         }
-        cout<<endl;
+        out<<endl;
     }
+
+	out.close();
+
 }
 
 void del(int** arr, int M)
@@ -41,5 +49,38 @@ void del(int** arr, int M)
     for(int i=0; i<M; i++)
         delete []arr[i];
     delete []arr;
+}
+bool find_min(int *a, int *b, int n)
+{
+    int a_min=a[0], b_min=b[0];
+
+    for(int i=1; i<n; i++)
+        if(a[i]<a_min)
+            a_min=a[i];
+
+    for(int i=1; i<n; i++)
+        if(b[i]<b_min)
+            b_min=b[i];
+
+    if(a_min>b_min)
+        return true;
+
+    return false;
+}
+
+void sorted_column(int **a, int n, int m)
+{
+    for(int i=0; i<m-1; i++)
+    {
+        for(int j=i+1; j<m; j++)
+        {
+            if(find_min(a[i], a[j], n))
+            {
+                int *tmp=a[i];
+                a[i]=a[j];
+                a[j]=tmp;
+            }
+        }
+    }
 }
 
