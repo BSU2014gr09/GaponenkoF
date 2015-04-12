@@ -22,8 +22,8 @@ void initial(int **arr,int const N, int const M)
 
 	for (int j = 0; j < N; j++)
 	{
-		for (int **i = arr; i < arr + M; i++)
-			in >> (*i)[j]; //по моему мнению аrr[j][i] яснее код делает!!! Мы пишем код не для компилятора, а для поддержки
+		for (int i=0; i < M; i++)
+			in >> arr[i][j];
 	}
     in.close();
 }
@@ -54,14 +54,13 @@ bool find_min(int *a, int *b, int n)
 {
     int a_min=a[0], b_min=b[0];
 
-    for(int i=1; i<n; i++)  //два цикла в один не пробовали? А если n=10000000000 Скорость увеличится
+    for(int i=1; i<n; i++)
+    {
         if(a[i]<a_min)
             a_min=a[i];
-
-    for(int i=1; i<n; i++)
         if(b[i]<b_min)
             b_min=b[i];
-
+    }
     if(a_min>b_min)
         return true;
 
