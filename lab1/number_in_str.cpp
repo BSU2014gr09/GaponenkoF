@@ -21,6 +21,7 @@ int main()
     int n=0;
     while(1)
     {
+    fl=1;
         cout<<endl<<"1 - condition"<<endl<<"2 - run"<<endl<<"3 - exit"<<endl;
         cin>>n;
         switch(n)

@@ -1,17 +1,18 @@
 #include <iostream>
 #include "str_header.h"
+#include <cstring>
 using namespace std;
 char* allocate(int len)
 {
-	return new char[len];
+    return new char[len];
 }
 bool initial(char *str,int len)
 {
-	cout<<"Enter str:"<<" "<<endl;
-	cin.getline(str,len);
-	cout<<str;
-	if(*str!=0)
-	return true;
+    cout<<"Enter str:"<<" "<<endl;
+    cin.getline(str,len);
+    cout<<str;
+    if(*str!=0)
+        return true;
 }
 int maxS(int *arr,int size)
 {
@@ -26,7 +27,7 @@ int maxS(int *arr,int size)
         sum+=*p;
         p++;
     }
-     cout<<endl<<"sum"<<" "<<sum<<endl;
+    cout<<endl<<"sum"<<" "<<sum<<endl;
     return max;
 }
 int find_number(char *str)
@@ -34,26 +35,23 @@ int find_number(char *str)
     char *pstr=new char[strlen(str)];
     strcpy(pstr,str);
     char arr_s[10];
+    char *pCstr;
     int arr_sum[10]= {0};
+    int sum=0;
+
     for (int i=0; i<10; i++)
     {
         *(arr_s+i)='0'+i;
     }
-    while(*pstr)
-    {
-        if(*pstr>='0' && *pstr<='9')
-        {
-            for (int i=0; i<10; i++)
-            {
-                if(*(arr_s+i)==*pstr)
-                    arr_sum[i]++;
-            }
-        }
-        pstr++;
-    }
-    int sum=0;
     for (int i=0; i<10; i++)
     {
+        pCstr=strchr(pstr,arr_s[i]);
+        while(pCstr)
+        {
+            pCstr++;
+            arr_sum[i]++;
+            pCstr=strchr(pCstr,arr_s[i]);
+        }
         sum+=*(arr_sum+i)*i;
     }
     return sum;
