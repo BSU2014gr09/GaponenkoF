@@ -1,5 +1,4 @@
 #include <iostream>
-#include "str_header.h"
 #include <cstring>
 using namespace std;
 char* allocate(int len)
@@ -14,9 +13,8 @@ bool initial(char *str,int len)
     if(*str!=0)
         return true;
 }
-int maxS(int *arr,int size)
+int maxS(int *arr,int size,int *sum)
 {
-    int sum=0;
     int max=*arr;
     int *p=arr;
     while(size)
@@ -27,30 +25,29 @@ int maxS(int *arr,int size)
         sum+=*p;
         p++;
     }
-    cout<<endl<<"sum"<<" "<<sum<<endl;
     return max;
 }
 int find_number(char *str)
 {
     char *pstr=new char[strlen(str)];
     strcpy(pstr,str);
-    char arr_s[10];
-    char *pCstr;
-    int arr_sum[10]= {0};
+    char arr_s[10];//создаём массив для хранения кодов цифр
+    char *pCstr;//указатель на  элемент, который требуется найти в слове
+    int arr_sum[10]= {0};//создаём массив для хранения количества цифр, соответствующих индексу элемента массива
     int sum=0;
 
     for (int i=0; i<10; i++)
     {
-        *(arr_s+i)='0'+i;
+        *(arr_s+i)='0'+i;//инициализируем массив для хранения кодов цифр
     }
     for (int i=0; i<10; i++)
     {
         pCstr=strchr(pstr,arr_s[i]);
         while(pCstr)
         {
-            pCstr++;
+            pCstr++;//сдвигаем указатель, чтобы не зациклить программу
             arr_sum[i]++;
-            pCstr=strchr(pCstr,arr_s[i]);
+            pCstr=strchr(pCstr,arr_s[i]);//Ищем arr_s[i] в слове, начиная с pCstr
         }
         sum+=*(arr_sum+i)*i;
     }
@@ -58,25 +55,27 @@ int find_number(char *str)
 }
 
 
-void find_word(char *str)
+void find_word(char *str)//Делим слова на строки
 {
+	int sum=0;
     char *pStr=new char[strlen(str)];
     strcpy(pStr,str);
     int i=0,N=0;
     char* m = strtok(pStr, " ");
-    while (m)
+    while (m)//Подсчитываем количество слов в строке
     {
         m = strtok(NULL, " ");
         N++;
     }
-    int *arr_sum = new int[N+1];
+    int *arr_sum = new int[N+1];//выделяем память под массив, в котором будут храниться значения сумм цифр для каждого слова
     char* p = strtok(str, " ");
     while (p)
     {
-        *(arr_sum+i)=find_number(p);
+        *(arr_sum+i)=find_number(p);//заполняем массив суммами цифр из каждого слова
         p = strtok(NULL, " ");
         i++;
     }
-    int max = maxS(arr_sum,N+1);
+    int max = maxS(arr_sum,N+1, &sum);//находим максимальную сумму цифр в строке
     cout<<"max:"<<max;
+    cout<<endl<<"sum"<<" "<<sum<<endl;
 }
