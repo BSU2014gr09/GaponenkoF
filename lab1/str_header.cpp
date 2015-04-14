@@ -13,7 +13,7 @@ bool initial(char *str,int len)
     if(*str!=0)
         return true;
 }
-int maxS(int *arr,int size,int *sum)
+int maxS(int *arr,int size,int &sum)
 {
     int max=*arr;
     int *p=arr;
@@ -75,7 +75,7 @@ void find_word(char *str)//Делим слова на строки
         p = strtok(NULL, " ");
         i++;
     }
-    int max = maxS(arr_sum,N+1, &sum);//находим максимальную сумму цифр в строке
+    int max = maxS(arr_sum,N+1, sum);//находим максимальную сумму цифр в строке
     cout<<"max:"<<max;
     cout<<endl<<"sum"<<" "<<sum<<endl;
 }
