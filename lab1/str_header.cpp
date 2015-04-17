@@ -13,7 +13,7 @@ bool initial(char *str,int len)
     if(*str!=0)
         return true;
 }
-int maxS(int *arr,int size,int &sum)
+int maxS(int *arr,int size,int &sum)//находим максимальную сумму цифр в строке
 {
     int max=*arr;
     int *p=arr;
@@ -31,23 +31,17 @@ int find_number(char *str)
 {
     char *pstr=new char[strlen(str)];
     strcpy(pstr,str);
-    char arr_s[10];//создаём массив для хранения кодов цифр
     char *pCstr;//указатель на  элемент, который требуется найти в слове
     int arr_sum[10]= {0};//создаём массив для хранения количества цифр, соответствующих индексу элемента массива
     int sum=0;
-
     for (int i=0; i<10; i++)
     {
-        *(arr_s+i)='0'+i;//инициализируем массив для хранения кодов цифр
-    }
-    for (int i=0; i<10; i++)
-    {
-        pCstr=strchr(pstr,arr_s[i]);
+        pCstr=strchr(pstr,'0'+i);
         while(pCstr)
         {
             pCstr++;//сдвигаем указатель, чтобы не зациклить программу
             arr_sum[i]++;
-            pCstr=strchr(pCstr,arr_s[i]);//Ищем arr_s[i] в слове, начиная с pCstr
+            pCstr=strchr(pCstr,'0'+i);//Ищем цифры в слове, начиная с pCstr
         }
         sum+=*(arr_sum+i)*i;
     }
