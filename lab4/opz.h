@@ -3,11 +3,9 @@
 struct Node
 {
     char arg ;
-    Node *prev;
+    Node *next;
 };
 void push (Node* &i, const char arg);
 char pop(Node* &i);
-int prior(char arg);
-
 
 #endif // OPZ_H_INCLUDED

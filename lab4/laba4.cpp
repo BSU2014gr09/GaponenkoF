@@ -1,18 +1,35 @@
 #include <iostream>
 #include <string.h>
 #include "opz.h"
+#include <stdio.h>
 using namespace std;
+
+int prior(char arg)//приоритет
+{
+    if(arg=='+' || arg=='-')
+        return 1;
+    if(arg=='*' || arg=='/')
+        return 2;
+    if(arg=='(' || arg==')')
+        return 0;
+    if(arg=='^')
+        return 3;
+}
 
 void doing()
 {
+    getchar();
     Node *opz = 0;
-   char str[]="2*(3*8+2)-5/3";
+    char str[10000];//="32-(424*23-4)";//"2*(3*8+2)-5/3";
+    cin.getline(str,1000);
     cout<<str;
-    char *str2=new char[strlen(str)+1];
+    char *str2=new char[2*strlen(str)];
     char *pstr = str;
+
     int j=0;
-    char pr=0;//приоритет
+    char pr=3;//приоритет
     char ks;//переменная для удаление открывающих скобок
+    bool flag=false;
 
     str2[0]=0;
     while(*pstr)
@@ -21,10 +38,19 @@ void doing()
         {
             if(*pstr!=')')//проверк
             {
-                if(prior(*pstr)<=pr && opz!=0)//проверяем приоритет
+                flag=true;
+                if(*pstr=='(' && *(pstr+1)=='-')
                 {
-                    str2[j]=pop(opz);//извлекаем элемент из стека
+                    str2[j]=' ';
                     j++;
+                    str2[j]='0';
+                    j++;
+                };
+                while(prior(*pstr)<=pr && opz!=0 && *(pstr)!='(' )//проверяем приоритет
+                {
+                    str2[j]=' ';
+                    str2[j+1]=pop(opz);//извлекаем элемент из стека
+                    j+=2;
                 }
                 push(opz,*pstr);//отправляем элемент в стек
                 pr=prior(*pstr);
@@ -33,15 +59,22 @@ void doing()
             {
                 while(prior(opz->arg)>0)
                 {
-                    str2[j]=pop(opz);
-                    j++;
+                    str2[j]=' ';
+                    str2[j+1]=pop(opz);
+                    j+=2;
                 }
                 ks=pop(opz);//извлекаем открывающую скобку из стека
-                pr=0;//обнуляем приоритет
+                pr=3;//обнуляем приоритет
             }
         }
         else
         {
+            if(flag)
+            {
+                str2[j]=' ';
+                j++;
+                flag=false;
+            }
             str2[j]=*pstr;
             j++;
         };

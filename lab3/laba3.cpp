@@ -16,7 +16,8 @@ void doing()
     time_print(&time2);
     cout<<endl<<"difference: "<<difference(time,time2)<<endl;
     cout<<endl<<"Enter the number of seconds which you want add:"<<endl;
-    int am=180;
+     int am;
+    cin>>am;
     //cin>>am;
     addition(&time,am);
     time_conversion(&time);
