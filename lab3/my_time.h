@@ -13,5 +13,5 @@ void time_print(Time *time);
 void addition(Time *time, int am);
 int difference(Time time, Time time2);
 int tosecond(Time time);
-
+    ~Time();
 #endif // MY_TIME_H_INCLUDED
