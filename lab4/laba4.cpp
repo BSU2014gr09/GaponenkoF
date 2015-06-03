@@ -30,12 +30,18 @@ void doing()
     char pr=3;//приоритет
     char ks;//переменная для удаление открывающих скобок
     bool flag=false;
+    char qs='t';
 
     str2[0]=0;
     while(*pstr)
     {
-        if(*pstr<'0' || *pstr>'9')
+        if((*pstr<'0' || *pstr>'9') && *pstr!='.')
         {
+            if(*pstr==' ' || *pstr==',')
+            {
+                pstr++;
+                continue;
+            };
             if(*pstr!=')')//проверк
             {
                 flag=true;
@@ -46,24 +52,25 @@ void doing()
                     str2[j]='0';
                     j++;
                 };
-                while(prior(*pstr)<=pr && opz!=0 && *(pstr)!='(' )//проверяем приоритет
+                while(opz!=0 && prior(*pstr)<=pr && prior(opz->arg)>0)//проверяем приоритет
                 {
-                    str2[j]=' ';
-                    str2[j+1]=pop(opz);//извлекаем элемент из стека
-                    j+=2;
-                }
+                        str2[j]=' ';
+                        str2[j+1]=pop(opz);//извлекаем элемент из стека
+                        j+=2;
+                };
                 push(opz,*pstr);//отправляем элемент в стек
                 pr=prior(*pstr);
             }
             else
             {
-                while(prior(opz->arg)>0)
+                while(opz && prior(opz->arg)>0)
                 {
                     str2[j]=' ';
                     str2[j+1]=pop(opz);
                     j+=2;
                 }
-                ks=pop(opz);//извлекаем открывающую скобку из стека
+                if(opz)
+                    ks=pop(opz);//извлекаем открывающую скобку из стека
                 pr=3;//обнуляем приоритет
             }
         }
@@ -85,7 +92,7 @@ void doing()
     {
         str2[j]=pop(opz);
         j++;
-    }
+    };
     cout<<endl<<str2;
 }
 
