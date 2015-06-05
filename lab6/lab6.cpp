@@ -6,12 +6,12 @@ using namespace std;
 
 void doing()
 {
-    char **str_arr = new char *[1000];
+    char **str_arr = new char *[100000];
     str_arr[0]=0;
     int i=0;
-    int arr[100]={0};//массив с количеством слов с двумя слогами.
+    int arr[1000]={0};//массив с количеством слов с двумя слогами.
     char buff[100];
-    char *str =new char[1000];
+    char *str =new char[100000];
     ifstream fin("mytext.txt");
     if (!fin.is_open())
         cout << "Error!\n";
@@ -19,12 +19,17 @@ void doing()
     {
         while( !fin.eof())
         {
-            fin.getline(str,1000);
-            findword(str, &str_arr[0], i,&arr[0]);
-            i++;
+            fin.getline(str,10000);
+            if(strlen(str))
+                {
+                findword(str, &str_arr[0], i,&arr[0]);
+                i++;
+                }
         };
+
+    cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
         sort_arr(&arr[0], &str_arr[0], i);
-        print(str_arr, i);
+        print(str_arr, i, &arr[0]);
         fin.close();
     };
 }

@@ -40,12 +40,14 @@ void doing()
     {
         if((*pstr<'0' || *pstr>'9') && *pstr!='.')
         {
+         if(*pstr=='(' ||  *pstr==')')
+            fr=true;
             if(!fr)
             {
                 cout<<endl<<"error"<<endl;
                 break;
             };
-            if(*pstr!='(' && *pstr!=')')
+            if(*pstr!='(' &&  *pstr!=')')
             fr=false;
             if(*pstr==' ' || *pstr==',')
             {
@@ -54,6 +56,8 @@ void doing()
             };
             if(*pstr!=')')//проверк
             {
+            if(*pstr=='(' ||  *pstr==')')
+            fr=true;
                 flag=true;
                 if(*pstr=='(' && *(pstr+1)=='-')
                 {

@@ -26,7 +26,7 @@ int syllables(char *str)
 
     while(*pstr)
     {
-        if(*pstr == 'a' || *pstr=='o'|| *pstr=='u' || *pstr=='y' || *pstr=='i' || *pstr=='e' )
+        if(*pstr == 'a' || *pstr=='o'|| *pstr=='u' || *pstr=='y' || *pstr=='i' || *pstr=='e')
         {
             k++;
         };
@@ -39,13 +39,18 @@ int syllables(char *str)
 
 void sort_arr(int *a, char **str_arr,int N)
 {
+    int tmp1;
+    char *tmp;
         for(int i=0; i<N-1; i++)
     {
         for(int j=i+1; j<N; j++)
         {
             if(a[i]>a[j])//попарно сравниваем столбцы
             {
-                char *tmp=str_arr[i];
+                tmp=str_arr[i];
+                tmp1 =a[i];
+                a[i]=a[j];
+                a[j]=tmp1;
                 str_arr[i]=str_arr[j];
                 str_arr[j]=tmp;
             }
@@ -53,10 +58,11 @@ void sort_arr(int *a, char **str_arr,int N)
     }
 }
 
-void print(char **a,int N)
+void print(char **a,int N, int *arr)
 {
     for(int i=0;i<N;i++)
     {
-        cout<<a[i]<<endl;
-    }
+        cout<<a[i]<<endl<<"Количество слов с 2 слогами: "<<arr[i]<<endl;
+    };
+    cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
 }
